@@ -1,0 +1,49 @@
+<div class="container-main">
+  <div class="Pagination">
+    <input
+      class="search"
+      type="text"
+      [(ngModel)]="filter"
+      placeholder="Search your beer here. You can search with any keyword."
+    />
+  </div>
+  <div id="table-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Beer</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div calss="table-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr
+          *ngFor="
+            let item of this.beerArray
+              | filter: filter
+              | paginate: { itemsPerPage: 20, currentPage: p };
+            let i = index
+          "
+        >
+          <td style="width: 200px">
+            <img src="{{ imageArray1[i].image }}" width="100" height="100" />
+          </td>
+          <td>
+            {{ item.id }} <br />
+            {{ item.ibu }} <br />
+            {{ item.abv }} <br />
+            {{ item.name }} <br />
+            {{ item.style }} <br />
+            {{ item.ounces }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="Pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
